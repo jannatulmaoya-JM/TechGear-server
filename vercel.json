@@ -6,8 +6,8 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/index.ts",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+      "destination": "/index.ts"
+     
     }
   ]
 }
