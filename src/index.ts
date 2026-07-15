@@ -78,6 +78,9 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
   res.send({ token });
 });
 
+app.get('/', (req: Request, res: Response) => {
+  res.send('Tech Gear Server is Running!');
+});
 //app.listen(5000, () => console.log("Server running on port 5000"));
 if (process.env.NODE_ENV !== 'production') {
   app.listen(5000, () => console.log("Server running on port 5000"));
