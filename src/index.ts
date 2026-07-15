@@ -9,6 +9,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const PORT = process.env.PORT || 5000;
 const { ObjectId } = require('mongodb');
 const uri = process.env.MONGODB_URI as string;
 const JWT_SECRET = process.env.JWT_SECRET || "super_secret_key_88f92b7c1a4e5d6f3g9h2j5k8l0n1m4q";
@@ -20,7 +21,7 @@ const client = new MongoClient(uri, {
 let db: any, productsCollection: any, ordersCollection: any, usersCollection: any;
 
 async function run() {
-  await client.connect();
+  //await client.connect();
   db = client.db("Tech-Gear");
   productsCollection = db.collection("Products");
   ordersCollection = db.collection("Orders");
@@ -77,4 +78,9 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
   res.send({ token });
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+//app.listen(5000, () => console.log("Server running on port 5000"));
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(5000, () => console.log("Server running on port 5000"));
+}
+
+export default app;
