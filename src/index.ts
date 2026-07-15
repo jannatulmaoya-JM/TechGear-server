@@ -54,7 +54,23 @@ async function run() {
         res.status(500).send({ message: "Error fetching product details" });
       }
     });
-    
+   
+app.put('/api/products/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const updateData = req.body;
+  const result = await productsCollection.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: updateData }
+  );
+  res.send(result);
+});
+
+
+app.delete('/api/products/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await productsCollection.deleteOne({ _id: new ObjectId(id) });
+  res.send(result);
+});
     app.post('/api/products', async (req: Request, res: Response) => {
       try {
         const newProduct = req.body;
